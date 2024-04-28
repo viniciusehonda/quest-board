@@ -36,7 +36,7 @@ public class Update(IMediator _mediator)
 
     var query = new GetContributorQuery(request.ContributorId);
 
-    var queryResult = await _mediator.Send(query, cancellationToken);
+    Result<UseCases.Contributors.ContributorDTO> queryResult = await _mediator.Send(query, cancellationToken);
 
     if (queryResult.Status == ResultStatus.NotFound)
     {

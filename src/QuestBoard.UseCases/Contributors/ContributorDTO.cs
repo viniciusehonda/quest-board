@@ -1,2 +1,2 @@
 ﻿namespace QuestBoard.UseCases.Contributors;
-public record ContributorDTO(int Id, string Name, string? PhoneNumber);
+public record ContributorDTO(Guid Id, string Name, string Email, string? PhoneNumber);

@@ -6,8 +6,8 @@ namespace QuestBoard.Infrastructure.Data;
 
 public static class SeedData
 {
-  public static readonly Contributor Contributor1 = new("Ardalis");
-  public static readonly Contributor Contributor2 = new("Snowfrog");
+  public static readonly Contributor Contributor1 = new("Contributor 1", "contributor1@email.com");
+  public static readonly Contributor Contributor2 = new("Contributor 2", "contributor2@email.com");
 
   public static void Initialize(IServiceProvider serviceProvider)
   {

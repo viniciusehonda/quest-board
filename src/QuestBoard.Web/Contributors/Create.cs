@@ -31,11 +31,11 @@ public class Create(IMediator _mediator)
     CancellationToken cancellationToken)
   {
     var result = await _mediator.Send(new CreateContributorCommand(request.Name!,
-      request.PhoneNumber), cancellationToken);
+      request.Email!, request.PhoneNumber), cancellationToken);
 
     if (result.IsSuccess)
     {
-      Response = new CreateContributorResponse(result.Value, request.Name!);
+      Response = new CreateContributorResponse(result.Value, request.Name!, request.Email!);
       return;
     }
     // TODO: Handle other cases as necessary

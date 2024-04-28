@@ -6,7 +6,7 @@ namespace QuestBoard.Core.ContributorAggregate.Events;
 /// A domain event that is dispatched whenever a contributor is deleted.
 /// The DeleteContributorService is used to dispatch this event.
 /// </summary>
-internal sealed class ContributorDeletedEvent(int contributorId) : DomainEventBase
+internal sealed class ContributorDeletedEvent(Guid contributorId) : DomainEventBase
 {
-  public int ContributorId { get; init; } = contributorId;
+  public Guid ContributorId { get; init; } = contributorId;
 }

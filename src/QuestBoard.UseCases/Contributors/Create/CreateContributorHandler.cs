@@ -5,12 +5,12 @@ using QuestBoard.Core.ContributorAggregate;
 namespace QuestBoard.UseCases.Contributors.Create;
 
 public class CreateContributorHandler(IRepository<Contributor> _repository)
-  : ICommandHandler<CreateContributorCommand, Result<int>>
+  : ICommandHandler<CreateContributorCommand, Result<Guid>>
 {
-  public async Task<Result<int>> Handle(CreateContributorCommand request,
+  public async Task<Result<Guid>> Handle(CreateContributorCommand request,
     CancellationToken cancellationToken)
   {
-    var newContributor = new Contributor(request.Name);
+    var newContributor = new Contributor(request.Name, request.Email);
     if (!string.IsNullOrEmpty(request.PhoneNumber))
     {
       newContributor.SetPhoneNumber(request.PhoneNumber);

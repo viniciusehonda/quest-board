@@ -1,7 +1,8 @@
 ﻿namespace QuestBoard.Web.Contributors;
 
-public class CreateContributorResponse(int id, string name)
+public class CreateContributorResponse(Guid id, string name, string email)
 {
-  public int Id { get; set; } = id;
+  public Guid Id { get; set; } = id;
   public string Name { get; set; } = name;
+  public string Email { get; set; } = email;
 }
