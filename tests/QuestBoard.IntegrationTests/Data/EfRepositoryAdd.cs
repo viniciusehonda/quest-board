@@ -1,4 +1,5 @@
-﻿using QuestBoard.Core.ContributorAggregate;
+﻿using QuestBoard.Core;
+using QuestBoard.Core.ContributorAggregate;
 using Xunit;
 
 namespace QuestBoard.IntegrationTests.Data;
@@ -8,18 +9,21 @@ public class EfRepositoryAdd : BaseEfRepoTestFixture
   [Fact]
   public async Task AddsContributorAndSetsId()
   {
-    var testContributorName = "testContributor";
-    var testContributorStatus = ContributorStatus.NotSet;
+    var testName = "name";
+    var testLastName = "Lastname";
+    var testEmail = "email@email.com";
+
     var repository = GetRepository();
-    var Contributor = new Contributor(testContributorName);
+    var User = new User(testName, testLastName, testEmail);
 
-    await repository.AddAsync(Contributor);
+    await repository.AddAsync(User);
 
-    var newContributor = (await repository.ListAsync())
+    var newUser = (await repository.ListAsync())
                     .FirstOrDefault();
 
-    Assert.Equal(testContributorName, newContributor?.Name);
-    Assert.Equal(testContributorStatus, newContributor?.Status);
-    Assert.True(newContributor?.Id > 0);
+    Assert.Equal(testName, newUser?.FirstName);
+    Assert.Equal(testLastName, newUser?.LastName);
+    Assert.Equal(testEmail, newUser?.Email);
+    Assert.NotEqual(newUser?.Id, Guid.Empty);
   }
 }

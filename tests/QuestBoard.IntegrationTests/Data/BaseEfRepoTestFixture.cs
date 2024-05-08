@@ -4,6 +4,8 @@ using QuestBoard.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using NSubstitute;
+using IDomainEventDispatcher = QuestBoard.Core.IDomainEventDispatcher;
+using QuestBoard.Core;
 
 namespace QuestBoard.IntegrationTests.Data;
 
@@ -36,8 +38,8 @@ public abstract class BaseEfRepoTestFixture
     return builder.Options;
   }
 
-  protected EfRepository<Contributor> GetRepository()
+  protected EfRepository<User> GetRepository()
   {
-    return new EfRepository<Contributor>(_dbContext);
+    return new EfRepository<User>(_dbContext);
   }
 }
