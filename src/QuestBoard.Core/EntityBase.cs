@@ -4,7 +4,7 @@ namespace QuestBoard.Core;
 
 public abstract class EntityBase
 {
-    public Guid Id { get; set; }
+    public Guid Id { get; set; } = Guid.NewGuid();
 
     private List<DomainEventBase> _domainEvents = new List<DomainEventBase>();
 

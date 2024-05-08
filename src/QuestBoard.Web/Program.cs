@@ -12,6 +12,8 @@ using FastEndpoints.Swagger;
 using MediatR;
 using Serilog;
 using Serilog.Extensions.Logging;
+using IDomainEventDispatcher = QuestBoard.Core.IDomainEventDispatcher;
+using MediatRDomainEventDispatcher = QuestBoard.Core.MediatRDomainEventDispatcher;
 
 var logger = Log.Logger = new LoggerConfiguration()
   .Enrich.FromLogContext()

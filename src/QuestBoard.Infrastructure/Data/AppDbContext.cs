@@ -2,6 +2,9 @@
 using Ardalis.SharedKernel;
 using QuestBoard.Core.ContributorAggregate;
 using Microsoft.EntityFrameworkCore;
+using QuestBoard.Core;
+using EntityBase = QuestBoard.Core.EntityBase;
+using IDomainEventDispatcher = QuestBoard.Core.IDomainEventDispatcher;
 
 namespace QuestBoard.Infrastructure.Data;
 public class AppDbContext : DbContext
@@ -16,6 +19,8 @@ public class AppDbContext : DbContext
   }
 
   public DbSet<Contributor> Contributors => Set<Contributor>();
+  public DbSet<Quest> Quests => Set<Quest>();
+  public DbSet<User> Users => Set<User>();
 
   protected override void OnModelCreating(ModelBuilder modelBuilder)
   {
