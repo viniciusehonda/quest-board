@@ -14,6 +14,8 @@ using Serilog;
 using Serilog.Extensions.Logging;
 using IDomainEventDispatcher = QuestBoard.Core.IDomainEventDispatcher;
 using MediatRDomainEventDispatcher = QuestBoard.Core.MediatRDomainEventDispatcher;
+using QuestBoard.Core;
+using QuestBoard.UseCases;
 
 var logger = Log.Logger = new LoggerConfiguration()
   .Enrich.FromLogContext()
@@ -106,7 +108,9 @@ void ConfigureMediatR()
   var mediatRAssemblies = new[]
 {
   Assembly.GetAssembly(typeof(Contributor)), // Core
-  Assembly.GetAssembly(typeof(CreateContributorCommand)) // UseCases
+  Assembly.GetAssembly(typeof(User)), // Core
+  Assembly.GetAssembly(typeof(CreateContributorCommand)), // UseCases,
+  Assembly.GetAssembly(typeof(CreateUserCommand)) // UseCases
 };
   builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(mediatRAssemblies!));
   builder.Services.AddScoped(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));

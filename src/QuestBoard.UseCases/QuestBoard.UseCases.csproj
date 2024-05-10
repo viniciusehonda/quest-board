@@ -10,4 +10,9 @@
     <ProjectReference Include="..\QuestBoard.Core\QuestBoard.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Users\Get\" />
+    <Folder Include="Users\Update\" />
+  </ItemGroup>
+
 </Project>
