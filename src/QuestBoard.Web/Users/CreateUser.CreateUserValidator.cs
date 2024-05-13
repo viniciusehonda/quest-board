@@ -4,7 +4,7 @@ using FluentValidation;
 using QuestBoard.Infrastructure.Data.Config;
 using QuestBoard.Web.Users;
 
-namespace QuestBoard.Web.User;
+namespace QuestBoard.Web.Users;
 
 public class CreateUserValidator : Validator<CreateUserRequest>
 {

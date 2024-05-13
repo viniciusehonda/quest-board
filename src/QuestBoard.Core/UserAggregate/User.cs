@@ -16,6 +16,14 @@ public class User(string firstName, string lastName, string email) : EntityBase,
         FirstName = Guard.Against.NullOrEmpty(firstName, nameof(firstName));
     }
 
+    public void UpdateLastName(string lastName) {
+        LastName = Guard.Against.NullOrEmpty(lastName, nameof(lastName));
+    }
+
+    public void UpdateEmail(string email) {
+        Email = Guard.Against.NullOrEmpty(email, nameof(email));
+    }
+
     public void UpdatePassword(string inputPassword) {
 
         Password = new Password("", "");
