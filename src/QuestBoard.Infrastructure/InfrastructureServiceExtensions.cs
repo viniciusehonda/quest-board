@@ -11,28 +11,42 @@
 // using Microsoft.Extensions.DependencyInjection;
 // using Microsoft.Extensions.Logging;
 
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using QuestBoard.Domain.Interfaces;
+using QuestBoard.Infrastructure.Database;
+using QuestBoard.Infrastructure.Repositories;
+
 namespace QuestBoard.Infrastructure;
+
 public static class InfrastructureServiceExtensions
 {
-  // public static IServiceCollection AddInfrastructureServices(
-  //   this IServiceCollection services,
-  //   ConfigurationManager config,
-  //   ILogger logger)
-  // {
-  //   string? connectionString = config.GetConnectionString("SqliteConnection");
-  //   Guard.Against.Null(connectionString);
-  //   services.AddDbContext<AppDbContext>(options =>
-  //    options.UseSqlite(connectionString));
+  public static IServiceCollection AddInfrastructureServices(
+    this IServiceCollection services,
+    ConfigurationManager config,
+    ILogger logger)
+  {
+    string? connectionString = config.GetConnectionString("PostgresqlConnectionString");
 
-  //   services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
-  //   services.AddScoped(typeof(IReadRepository<>), typeof(EfRepository<>));
-  //   services.AddScoped<IListContributorsQueryService, ListContributorsQueryService>();
-  //   services.AddScoped<IDeleteContributorService, DeleteContributorService>();
+    if (string.IsNullOrEmpty(connectionString))
+    {
+      throw new Exception("Invalid PostgreSQL connectionString");
+    }
 
-  //   services.Configure<MailserverConfiguration>(config.GetSection("Mailserver"));
+    services.AddSingleton<IDbConnectionFactory>(provider => new NpgsqlConnectionFactory(connectionString));
+    services.AddSingleton<DatabaseInitializer>();
 
-  //   logger.LogInformation("{Project} services registered", "Infrastructure");
+    services.RegisterRepositories();
 
-  //   return services;
-  // }
+    logger.LogInformation("{Project} services registered", "Infrastructure");
+
+    return services;
+  }
+
+  private static void RegisterRepositories(this IServiceCollection services)
+  {
+    services.AddScoped<IQuestRepository, QuestRepository>();
+    services.AddScoped<IUserRepository, UserRepository>();
+  }
 }

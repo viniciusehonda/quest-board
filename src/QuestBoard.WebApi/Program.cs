@@ -1,7 +1,24 @@
+using QuestBoard.Infrastructure;
+using QuestBoard.Infrastructure.Database;
+using Serilog;
+using Serilog.Extensions.Logging;
+
 var builder = WebApplication.CreateBuilder(args);
+
+var logger = Log.Logger = new LoggerConfiguration()
+    .Enrich.FromLogContext()
+    .WriteTo.Console()
+    .CreateLogger();
+
+logger.Information("Starting web host");
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+var appLogger = new SerilogLoggerFactory(logger)
+    .CreateLogger<Program>();
+
+builder.Services.AddInfrastructureServices(builder.Configuration, appLogger);
 
 var app = builder.Build();
 
@@ -21,7 +38,7 @@ var summaries = new[]
 
 app.MapGet("/weatherforecast", () =>
 {
-    var forecast =  Enumerable.Range(1, 5).Select(index =>
+    var forecast = Enumerable.Range(1, 5).Select(index =>
         new WeatherForecast
         (
             DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
@@ -33,7 +50,10 @@ app.MapGet("/weatherforecast", () =>
 })
 .WithName("GetWeatherForecast");
 
-app.Run();
+var databaseInitializer = app.Services.GetRequiredService<DatabaseInitializer>();
+await databaseInitializer.InitializeAsync();
+
+await app.RunAsync();
 
 record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
 {
