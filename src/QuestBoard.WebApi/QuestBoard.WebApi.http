@@ -1,0 +1,6 @@
+@QuestBoard.WebApi_HostAddress = http://localhost:5054
+
+GET {{QuestBoard.WebApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
