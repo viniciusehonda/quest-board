@@ -38,3 +38,6 @@ log*
 *.sqlite
 *.sqlite-shm
 *.sqlite-wal
+
+appsettings.*.json
+*appsettings.*.json
