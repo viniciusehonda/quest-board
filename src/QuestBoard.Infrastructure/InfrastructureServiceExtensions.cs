@@ -1,18 +1,4 @@
-﻿// using Ardalis.GuardClauses;
-// using Ardalis.SharedKernel;
-// using QuestBoard.Core.Interfaces;
-// using QuestBoard.Core.Services;
-// using QuestBoard.Infrastructure.Data;
-// using QuestBoard.Infrastructure.Data.Queries;
-// using QuestBoard.Infrastructure.Email;
-// using QuestBoard.UseCases.Contributors.List;
-// using Microsoft.EntityFrameworkCore;
-// using Microsoft.Extensions.Configuration;
-// using Microsoft.Extensions.DependencyInjection;
-// using Microsoft.Extensions.Logging;
-
-using Dapper;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using QuestBoard.Domain.Interfaces;
