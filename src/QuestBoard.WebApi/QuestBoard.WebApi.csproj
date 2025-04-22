@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\QuestBoard.Application\QuestBoard.Application.csproj" />
     <ProjectReference Include="..\QuestBoard.Infrastructure\QuestBoard.Infrastructure.csproj" />
   </ItemGroup>
 

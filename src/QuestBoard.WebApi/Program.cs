@@ -1,3 +1,6 @@
+using Microsoft.AspNetCore.Mvc;
+using QuestBoard.Application.Services;
+using QuestBoard.Domain.DTO;
 using QuestBoard.Infrastructure;
 using QuestBoard.Infrastructure.Database;
 using Serilog;
@@ -20,6 +23,9 @@ var appLogger = new SerilogLoggerFactory(logger)
 
 builder.Services.AddInfrastructureServices(builder.Configuration, appLogger);
 
+builder.Services.AddScoped<UserService>();
+builder.Services.AddScoped<QuestService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -31,31 +37,26 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-var summaries = new[]
+app.MapGet("/user", async ([FromServices] UserService service, [FromQuery] string userId) =>
 {
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
-
-app.MapGet("/weatherforecast", () =>
-{
-    var forecast = Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
-        (
-            DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
-        ))
-        .ToArray();
-    return forecast;
+    return Results.Ok(await service.GetUserByIdAsync(userId));
 })
-.WithName("GetWeatherForecast");
+.WithName("GetUser");
+
+app.MapPost("/quest", async ([FromServices] QuestService service, [FromBody] QuestDTO data) =>
+{
+    await service.AddAync(data);
+    return Results.Accepted();
+})
+.WithName("AddQuest");
+
+app.MapGet("/quest", async ([FromServices] QuestService service, [FromQuery] string publisherId) =>
+{
+    return Results.Ok(await service.GetPublisherQuestsAsync(publisherId));
+})
+.WithName("GetPublisherQuests");
 
 var databaseInitializer = app.Services.GetRequiredService<DatabaseInitializer>();
 await databaseInitializer.InitializeAsync();
 
 await app.RunAsync();
-
-record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}

@@ -8,18 +8,22 @@ public class User
 
     public List<Quest> PublisedQuests { get; set; } = new();
 
-    private User(string id, string name, string email)
+    public DateTime CreatedAt { get; private set; }
+    public DateTime? UpdatedAt { get; private set; }
+
+    private User(string id, string name, string email, DateTime createdAt)
     {
         Id = id;
         Name = name;
         Email = email;
+        CreatedAt = createdAt;
     }
 
     public static class Factory
     {
-        public static User Create(string id, string name, string email)
+        public static User Create(string id, string name, string email, DateTime createdAt)
         {
-            return new User(id, name, email);
+            return new User(id, name, email, createdAt);
         }
     }
 }

@@ -27,6 +27,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\QuestBoard.Domain\QuestBoard.Domain.csproj" />
+    <ProjectReference Include="..\..\src\QuestBoard.Infrastructure\QuestBoard.Infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>

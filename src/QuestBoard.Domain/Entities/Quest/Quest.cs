@@ -17,7 +17,8 @@ public class Quest
      string title,
       string description,
         QuestDifficulty difficulty,
-         string publisherId)
+         string publisherId,
+         DateTime createdAt)
     {
         Id = id;
         Title = title;
@@ -25,12 +26,14 @@ public class Quest
         Status = QuestStatus.Draft;
         Difficulty = difficulty;
         PublisherId = publisherId;
+        CreatedAt = createdAt;
     }
 
-    public void Update(string title, string description)
+    public void Update(string title, string description, DateTime updatedAt)
     {
         Title = title;
         Description = description;
+        UpdatedAt = updatedAt;
     }
 
     public void Publish()
@@ -54,9 +57,10 @@ public class Quest
         string title,
         string description,
         QuestDifficulty difficulty,
-        string publisherId)
+        string publisherId,
+        DateTime createdAt)
         {
-            return new Quest(id, title, description, difficulty, publisherId);
+            return new Quest(id, title, description, difficulty, publisherId, createdAt);
         }
     }
 }

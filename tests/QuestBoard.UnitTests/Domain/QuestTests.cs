@@ -1,10 +1,17 @@
 using QuestBoard.Domain;
+using QuestBoard.UnitTests.Mocks;
 using Xunit;
 
 namespace QuestBoard.UnitTests.Domain;
 
 public class QuestTests
 {
+    private readonly MockDateTimeProvider _dateTimeProvider;
+    public QuestTests()
+    {
+        _dateTimeProvider = new MockDateTimeProvider();
+    }
+
     [Fact]
     public void GivenParameters_ShouldReturnAQuestWithGivenParameters()
     {
@@ -14,18 +21,21 @@ public class QuestTests
         string sutDescription = "This is a new quest for the test";
         QuestDifficulty sutDifficulty = QuestDifficulty.Medium;
         string sutPublisherId = Guid.NewGuid().ToString();
+        DateTime sutCreatedAt = _dateTimeProvider.Now;
         //Act
         var actual = Quest.Factory.Create(sutId,
          sutTitle,
           sutDescription,
            sutDifficulty,
-            sutPublisherId);
+            sutPublisherId,
+            sutCreatedAt);
         //Assert
         Assert.Equal(sutId, actual.Id);
         Assert.Equal(sutTitle, actual.Title);
         Assert.Equal(sutDescription, actual.Description);
         Assert.Equal(sutDifficulty, actual.Difficulty);
         Assert.Equal(sutPublisherId, actual.PublisherId);
+        Assert.Equal(sutCreatedAt, actual.CreatedAt);
     }
 
     [Fact]
@@ -41,16 +51,19 @@ public class QuestTests
          sutTitle,
           sutDescription,
            sutDifficulty,
-            sutPublisherId);
+            sutPublisherId,
+            _dateTimeProvider.Now);
         string sutUpdatedTitle = "Quest XYZ";
         string sutUpdatedDescription = "This is the epic quest XYZ";
+        DateTime sutUpdatedAt = DateTime.Now;
 
         //Act
-        sut.Update(sutUpdatedTitle, sutUpdatedDescription);
+        sut.Update(sutUpdatedTitle, sutUpdatedDescription, sutUpdatedAt);
 
         //Assert
         Assert.Equal(sutUpdatedTitle, sut.Title);
         Assert.Equal(sutUpdatedDescription, sut.Description);
+        Assert.Equal(sutUpdatedAt, sut.UpdatedAt);
     }
 
     [Fact]
@@ -66,7 +79,8 @@ public class QuestTests
          sutTitle,
           sutDescription,
            sutDifficulty,
-            sutPublisherId);
+            sutPublisherId,
+            _dateTimeProvider.Now);
         var newStatus = QuestStatus.Published;
         //Act
         sut.Publish();
@@ -87,7 +101,8 @@ public class QuestTests
          sutTitle,
           sutDescription,
            sutDifficulty,
-            sutPublisherId);
+            sutPublisherId,
+            _dateTimeProvider.Now);
         var newStatus = QuestStatus.Finished;
         //Act
         sut.Finish();
@@ -108,7 +123,8 @@ public class QuestTests
          sutTitle,
           sutDescription,
            sutDifficulty,
-            sutPublisherId);
+            sutPublisherId,
+            _dateTimeProvider.Now);
         var newStatus = QuestStatus.Cancelled;
         //Act
         sut.Cancel();
