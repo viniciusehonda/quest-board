@@ -25,6 +25,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuestBoard.WebApi", "src\Qu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuestBoard.Application", "src\QuestBoard.Application\QuestBoard.Application.csproj", "{D47EB804-2C4F-4CC9-AB30-F82216C9F7CD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuestBoard.Identity", "src\QuestBoard.Identity\QuestBoard.Identity.csproj", "{05466BC7-78A6-467C-964D-C6C74A565AF1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -95,6 +97,18 @@ Global
 		{D47EB804-2C4F-4CC9-AB30-F82216C9F7CD}.Release|x64.Build.0 = Release|Any CPU
 		{D47EB804-2C4F-4CC9-AB30-F82216C9F7CD}.Release|x86.ActiveCfg = Release|Any CPU
 		{D47EB804-2C4F-4CC9-AB30-F82216C9F7CD}.Release|x86.Build.0 = Release|Any CPU
+		{05466BC7-78A6-467C-964D-C6C74A565AF1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05466BC7-78A6-467C-964D-C6C74A565AF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05466BC7-78A6-467C-964D-C6C74A565AF1}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{05466BC7-78A6-467C-964D-C6C74A565AF1}.Debug|x64.Build.0 = Debug|Any CPU
+		{05466BC7-78A6-467C-964D-C6C74A565AF1}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{05466BC7-78A6-467C-964D-C6C74A565AF1}.Debug|x86.Build.0 = Debug|Any CPU
+		{05466BC7-78A6-467C-964D-C6C74A565AF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05466BC7-78A6-467C-964D-C6C74A565AF1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05466BC7-78A6-467C-964D-C6C74A565AF1}.Release|x64.ActiveCfg = Release|Any CPU
+		{05466BC7-78A6-467C-964D-C6C74A565AF1}.Release|x64.Build.0 = Release|Any CPU
+		{05466BC7-78A6-467C-964D-C6C74A565AF1}.Release|x86.ActiveCfg = Release|Any CPU
+		{05466BC7-78A6-467C-964D-C6C74A565AF1}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -105,6 +119,7 @@ Global
 		{97CBACCF-5B5B-4F0D-A983-FCAA8C554720} = {106AE906-5075-410A-B941-912F811848EE}
 		{E395421D-2101-49C7-AAE8-063BFB5413E8} = {106AE906-5075-410A-B941-912F811848EE}
 		{D47EB804-2C4F-4CC9-AB30-F82216C9F7CD} = {106AE906-5075-410A-B941-912F811848EE}
+		{05466BC7-78A6-467C-964D-C6C74A565AF1} = {106AE906-5075-410A-B941-912F811848EE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B0F19343-8185-4A9F-9165-0EA8544BC925}

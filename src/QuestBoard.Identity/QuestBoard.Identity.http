@@ -1,0 +1,6 @@
+@QuestBoard.Identity_HostAddress = http://localhost:5118
+
+GET {{QuestBoard.Identity_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
